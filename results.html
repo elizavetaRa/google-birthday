@@ -23,9 +23,6 @@ h3 {font-size: 16px; margin-bottom: 0;}
 ul {margin: 0; padding: 0;}
 
 
-
-
-
 /* Header */
 
 header {
@@ -386,6 +383,206 @@ body > footer li {
 body > footer a {color: #777;}
 
 body > footer a:hover {color: #333;}
+
+/* Responsive styles for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px; /* Slightly larger font for readability */
+    }
+
+    header {
+        padding: 10px 5px; /* Adjust padding for smaller screens */
+    }
+
+    header div {
+        flex-wrap: wrap; /* Allow header items to stack */
+        justify-content: center; /* Center-align header content */
+        padding: 5px 10px; /* Compact padding */
+    }
+
+    form {
+        width: 90%; /* Reduce form width */
+        margin: 10px auto; /* Center the form */
+    }
+
+    input[type='search'] {
+        width: 100%; /* Full width for search input */
+    }
+
+    nav {
+        margin-left: 0; /* Remove unnecessary margin */
+        flex-wrap: wrap; /* Allow navigation items to wrap */
+        justify-content: center; /* Center-align navigation */
+        font-size: 12px; /* Adjust font size */
+    }
+
+    nav a {
+        padding: 8px 10px; /* Adjust padding for smaller links */
+        font-size: 12px; /* Reduce font size */
+    }
+
+    main {
+        margin-left: 10px; /* Reduce left margin */
+        width: auto; /* Allow dynamic width */
+    }
+
+    .card img {
+        float: none; /* Disable float for small screens */
+        display: block; /* Center the image */
+        margin: 0 auto; /* Center the image */
+        width: 100%; /* Full width for mobile */
+        max-height: 200px; /* Restrict height */
+    }
+
+    .card {
+        padding: 10px; /* Compact padding */
+        box-shadow: none; /* Simplify box shadow */
+    }
+
+    #results > li {
+    padding: 10px 15px; /* Add equal padding on top, bottom, left, and right */
+    border-bottom: 1px solid #e0e0e0; /* Light gray separator between results */
+    margin: 0 auto; /* Center the results within the container */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    width: calc(100% - 30px); /* Maintain consistent padding with full width */
+}
+
+#results > li:last-child {
+    border-bottom: none; /* Remove separator for the last result */
+}
+
+    #related ul {
+        columns: 1; /* Single column for related searches */
+    }
+
+    footer div, footer ul {
+        font-size: 12px; /* Smaller footer font */
+        padding-left: 10px; /* Adjust padding */
+    }
+
+    footer li {
+        margin-right: 10px; /* Reduce spacing between items */
+    }
+}
+
+/* Responsive styles for extra small devices (e.g., smartphones, max-width: 480px) */
+@media screen and (max-width: 480px) {
+    header div {
+        padding: 5px; /* Reduce header padding */
+    }
+
+    form {
+        padding: 0 10px; /* Add spacing around form */
+    }
+
+    input[type='search'] {
+        font-size: 12px; /* Reduce input font size */
+        height: 35px; /* Adjust input height */
+    }
+
+    button svg {
+        height: 20px; /* Reduce button icon size */
+        width: 20px;
+    }
+
+    nav a {
+        font-size: 10px; /* Reduce navigation font size */
+    }
+
+    .card h3 {
+        font-size: 14px; /* Smaller font for titles */
+    }
+
+    .card p {
+        font-size: 12px; /* Adjust paragraph font */
+    }
+
+    table img {
+        width: 20px; /* Adjust pagination icon size */
+        height: auto;
+    }
+
+    #results > li {
+        padding-bottom: 20px; /* More spacing for extra small screens */
+        border-bottom: 1px solid #e0e0e0; /* Keep separator line */
+    }
+
+    #results > li:last-child {
+        border-bottom: none; /* Remove separator from the last result */
+    }
+}
+@media screen and (max-width: 768px) {
+    html, body {
+        overflow-x: hidden; /* Hide horizontal overflow for mobile screens */
+    }
+
+    header div span {
+        display: none; /* Hide the span with Sign In and Apps on smaller screens */
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap; /* Allow items to wrap if needed */
+        justify-content: center; /* Center-align the visible items */
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    nav a:nth-child(n+7) {
+        display: none; /* Hide items starting from the 7th */
+    }
+
+    nav a {
+        padding: 5px 10px; /* Adjust padding for smaller links */
+        font-size: 12px; /* Reduce font size */
+        text-align: center; /* Center-align text */
+        flex: 1 0 auto; /* Allow items to resize and wrap */
+    }
+}
+
+/* Ensure the search bar and submit button fit properly */
+form {
+    display: flex; /* Use flexbox for proper alignment */
+    align-items: center; /* Vertically center the input and button */
+    background-color: #fff;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    padding: 0 10px; /* Add padding inside the form */
+    width: 90%; /* Adjust width for smaller screens */
+    margin: 0 auto; /* Center align the form */
+}
+
+input[type='search'] {
+    flex: 1; /* Take up all available space */
+    border: none;
+    font: 16px Arial, sans-serif;
+    height: 44px;
+    outline: none;
+    padding: 0 10px; /* Add padding inside the input */
+    min-width: 0; /* Prevent flexbox from shrinking the input too much */
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex; /* Ensure button aligns with the input */
+    align-items: center; /* Center the button icon */
+    justify-content: center; /* Center the button icon */
+    height: 44px;
+    width: 44px; /* Keep the button square */
+    padding: 0;
+    margin: 0; /* Remove any unwanted margin */
+}
+
+button svg {
+    fill: #4285f4;
+    height: 24px;
+    width: 24px;
+}
+
     </style>
 </head>
 <body>
