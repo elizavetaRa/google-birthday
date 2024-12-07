@@ -1,596 +1,741 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Google Results</title>
     <style>
-html, body {
-    background: #fff;
-    color: #222;
-    font: 13px Arial, sans-serif;
-    margin: 0;
-}
-
-main * {max-height: 1000000px;}  /* Override 'Font Boosting' in Chrome mobile */
-
-a {text-decoration: none;}
-
-p {margin-top: 0;}
-
-h3 {font-size: 16px; margin-bottom: 0;}
-
-ul {margin: 0; padding: 0;}
-
-
-/* Header */
-
-header {
-    background: #fafafa;
-    border-bottom: 1px solid #e4e4e4;
-}
-
-header div {
-    padding: 20px 12px 15px;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-}
-
-header div span {
-    margin: 0 17px 0 auto;
-}
-
-header div > a {height: 44px;}
-
-form {
-    background-color: #fff;
-    border: none;
-
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-
-    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-
-    box-sizing: border-box;
-    margin: 0 17px;
-    outline: none;
-    padding: 0 15px;
-    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
-    width: 632px;
-}
-
-form:hover {
-    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
-}
-
-input[type='search'] {
-    border: none;
-    display: inline-block;
-    font: 16px Arial, sans-serif;
-    height: 44px;
-    outline: none;
-    width: 580px;
-}
-
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    vertical-align: middle;
-}
-
-button svg {
-    fill: #4285f4;
-    height: 24px;
-    width: 24px;
-}
-
-#apps {
-    background: url(https://ssl.gstatic.com/gb/images/i2_2ec824b0.png) -132px -38px/528px 68px;
-    box-sizing: border-box;
-    display: inline-block;
-    height: 30px;
-    margin-right: 15px;
-    opacity: 0.55;
-    vertical-align: middle;
-    width: 30px;
-}
-
-#apps:hover {opacity: 0.85;}
-
-#signin {
-    background: #4285f4;
-    background: -moz-linear-gradient(#4387fd, #4683ea);
-    background: -webkit-linear-gradient(#4387fd, #4683ea);
-    background: linear-gradient(#4387fd, #4683ea);
-
-    border: 1px solid #4285f4;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-
-    color: white;
-    cursor: default;
-    display: inline-block;
-    font-weight: bold;
-    line-height: 28px;
-    padding: 0 12px;
-    text-decoration: none;
-    vertical-align: middle;
-}
-
-#signin:hover {
-    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-}
-
-#signin:active {
-    background: #3c78dc;
-    background: -moz-linear-gradient(top, #3c7ae4, #3f76d3);
-    background: -webkit-linear-gradient(top, #3c7ae4, #3f76d3);
-    background: linear-gradient(to top, #3c7ae4, #3f76d3);
-
-    -webkit-box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.15);
-}
-
-nav {
-    align-items: center;
-    display: flex;
-    margin-left: 150px;
-    width: 632px;
-}
-
-nav a:nth-child(7) {margin-left: auto;}
-
-nav a {
-    border: 1px solid transparent;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    color: #777;
-    line-height: 19px;
-    padding: 10px 15px;
-}
-
-nav .selected {
-    border-bottom: 3px solid #1A73E8;
-    color: #1A73E8;
-    font-weight: bold;
-}
-
-nav .selected:hover {color: #1A73E8;}
-
-nav a:hover {color: #222;}
-
-nav a:active{color: #1A73E8;}
-
-#tools {padding: 4px 15px;}
-
-#tools:hover {
-    background: #f8f8f8;
-    background: -moz-linear-gradient(#f8f8f8, #f1f1f1);
-    background: -webkit-linear-gradient(#f8f8f8, #f1f1f1);
-    background: linear-gradient(#f8f8f8, #f1f1f1);
-
-    border: 1px solid #c6c6c6;
-
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-
-    color: #777;
-}
-
-#tools:active {
-    background: #f6f6f6;
-    background: -moz-linear-gradient(#f1f1f1, #f6f6f6);
-    background: -webkit-linear-gradient(#f1f1f1, #f6f6f6);
-    background: linear-gradient(#f1f1f1, #f6f6f6);
-
-    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-
-    color: #000;
-}
-
-
-
-
-
-/* Main */
-
-main {
-    margin-left: 150px;
-    width: 632px;
-}
-
-main a:link {color:#1a0dab;}
-
-main a:hover {text-decoration: underline;}
-
-#stats {
-    color: #777;
-    padding: 12px 20px;
-}
-
-main > ul {margin-bottom: 50px;}
-
-#results > li {
-    list-style-type: none;
-    margin-bottom: 25px;
-}
-
-#results p {
-    color: #545454;
-    line-height: 1.4;
-    margin-top: 3px;
-}
-
-.card {
-    border: none;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    padding: 0 0 20px 20px;
-}
-
-.card > h3 {
-    margin: 0;
-    padding-top: 20px;
-}
-
-.card img {
-    float: right;
-    max-width: 100%; /* Ensure it doesn't overflow the card width */
-    max-height: 150px; /* Restrict height to fit within the card */
-    border-radius: 4px; /* Optional: rounded corners */
-    object-fit: cover; /* Maintain aspect ratio while fitting */
-}
-
-
-.card ol {
-    list-style-position: inside;
-    margin: 10px auto;
-    padding: 0;
-}
-
-.card li {
-    font-size: 16px;
-    line-height: 24px;
-}
-
-.card li:last-child {
-    line-height: 30px;
-    list-style-type: none;
-    padding-left: 18px;
-}
-
-.card li:last-child a {
-    color: #777;
-    font-size: 14px;
-}
-
-#results > li:first-child footer {
-    margin-bottom: 5px;
-    padding-top: 5px;
-    text-align: end;
-}
-
-#results > li:first-child footer a {
-    color: #777;
-    font-size: 12px;
-    padding: 0 8px;
-}
-
-#results > li:first-child footer svg {
-    fill: #9e9e9e;
-    height: 16px;
-    line-height: 16px;
-    vertical-align: bottom;
-    width: 16px;
-}
-
-#results > li:nth-child(n+2) {
-    padding-left: 20px;
-}
-
-#results > li:nth-child(n+2) a:nth-child(2) {
-    margin-left: 5px;
-}
-
-.title {
-    font-size: 18px;
-    font-weight: normal;
-    margin: 10px 0 2px;
-}
-
-.link {
-    color: #006621;
-    display: inline-block;
-    font-size: 14px;
-}
-
-.down-arrow {
-    border-color: #006621 transparent;
-    border-style: solid;
-    border-width: 5px 4px 0;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.date {color: #808080;}
-
-#related {padding-left: 20px;}
-
-#related h3 {
-    font-size: 18px;
-    font-weight: normal;
-}
-
-#related ul {
-    columns: 2;
-    margin-top: 10px;
-}
-
-#related li {
-    list-style: none;
-    padding: 5px 0;
-}
-
-#related a {font-size: 14px;}
-
-table {
-    color: rgba(0, 0, 0, 0.87);
-    margin: 30px auto;
-    text-align: center;
-}
-
-table img {display: block;}
-
-table a {color: #4285f4;}
-
-td:last-child {
-    text-align: end;
-    width: 80px;
-}
-
-
-
-
-
-/* Footer */
-
-body > footer {margin-top: 30px;}
-
-body > footer div, body > footer ul {
-    background: #f2f2f2;
-    border-top: 1px solid #e4e4e4;
-    color: rgba(0, 0, 0, 0.54);
-    font-size: 15px;
-    line-height: 40px;
-    padding-left: 150px;
-}
-
-body > footer li {
-    display: inline;
-    font-size: 13px;
-    margin-right: 25px;
-}
-
-body > footer a {color: #777;}
-
-body > footer a:hover {color: #333;}
-
-/* Responsive styles for screens smaller than 768px */
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 14px; /* Slightly larger font for readability */
-    }
-
-    header {
-        padding: 10px 5px; /* Adjust padding for smaller screens */
-    }
-
-    header div {
-        flex-wrap: wrap; /* Allow header items to stack */
-        justify-content: center; /* Center-align header content */
-        padding: 5px 10px; /* Compact padding */
-    }
-
-    form {
-        width: 90%; /* Reduce form width */
-        margin: 10px auto; /* Center the form */
-    }
-
-    input[type='search'] {
-        width: 100%; /* Full width for search input */
-    }
-
-    nav {
-        margin-left: 0; /* Remove unnecessary margin */
-        flex-wrap: wrap; /* Allow navigation items to wrap */
-        justify-content: center; /* Center-align navigation */
-        font-size: 12px; /* Adjust font size */
-    }
-
-    nav a {
-        padding: 8px 10px; /* Adjust padding for smaller links */
-        font-size: 12px; /* Reduce font size */
-    }
-
-    main {
-        margin-left: 10px; /* Reduce left margin */
-        width: auto; /* Allow dynamic width */
-    }
-
-    .card img {
-        float: none; /* Disable float for small screens */
-        display: block; /* Center the image */
-        margin: 0 auto; /* Center the image */
-        width: 100%; /* Full width for mobile */
-        max-height: 200px; /* Restrict height */
-    }
-
-    .card {
-        padding: 10px; /* Compact padding */
-        box-shadow: none; /* Simplify box shadow */
-    }
-
-    #results > li {
-    padding: 10px 15px; /* Add equal padding on top, bottom, left, and right */
-    border-bottom: 1px solid #e0e0e0; /* Light gray separator between results */
-    margin: 0 auto; /* Center the results within the container */
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
-    width: calc(100% - 30px); /* Maintain consistent padding with full width */
-}
-
-#results > li:last-child {
-    border-bottom: none; /* Remove separator for the last result */
-}
-
-    #related ul {
-        columns: 1; /* Single column for related searches */
-    }
-
-    footer div, footer ul {
-        font-size: 12px; /* Smaller footer font */
-        padding-left: 10px; /* Adjust padding */
-    }
-
-    footer li {
-        margin-right: 10px; /* Reduce spacing between items */
-    }
-}
-
-/* Responsive styles for extra small devices (e.g., smartphones, max-width: 480px) */
-@media screen and (max-width: 480px) {
-    header div {
-        padding: 5px; /* Reduce header padding */
-    }
-
-    form {
-        padding: 0 10px; /* Add spacing around form */
-    }
-
-    input[type='search'] {
-        font-size: 12px; /* Reduce input font size */
-        height: 35px; /* Adjust input height */
-    }
-
-    button svg {
-        height: 20px; /* Reduce button icon size */
-        width: 20px;
-    }
-
-    nav a {
-        font-size: 10px; /* Reduce navigation font size */
-    }
-
-    .card h3 {
-        font-size: 14px; /* Smaller font for titles */
-    }
-
-    .card p {
-        font-size: 12px; /* Adjust paragraph font */
-    }
-
-    table img {
-        width: 20px; /* Adjust pagination icon size */
-        height: auto;
-    }
-
-    #results > li {
-        padding-bottom: 20px; /* More spacing for extra small screens */
-        border-bottom: 1px solid #e0e0e0; /* Keep separator line */
-    }
-
-    #results > li:last-child {
-        border-bottom: none; /* Remove separator from the last result */
-    }
-}
-@media screen and (max-width: 768px) {
-    html, body {
-        overflow-x: hidden; /* Hide horizontal overflow for mobile screens */
-    }
-
-    header div span {
-        display: none; /* Hide the span with Sign In and Apps on smaller screens */
-    }
-
-    nav {
-        display: flex;
-        flex-wrap: wrap; /* Allow items to wrap if needed */
-        justify-content: center; /* Center-align the visible items */
-        width: 100%;
-        padding: 10px 0;
-    }
-
-    nav a:nth-child(n+7) {
-        display: none; /* Hide items starting from the 7th */
-    }
-
-    nav a {
-        padding: 5px 10px; /* Adjust padding for smaller links */
-        font-size: 12px; /* Reduce font size */
-        text-align: center; /* Center-align text */
-        flex: 1 0 auto; /* Allow items to resize and wrap */
-    }
-}
-
-/* Ensure the search bar and submit button fit properly */
-form {
-    display: flex; /* Use flexbox for proper alignment */
-    align-items: center; /* Vertically center the input and button */
-    background-color: #fff;
-    border: none;
-    border-radius: 2px;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
-    padding: 0 10px; /* Add padding inside the form */
-    width: 90%; /* Adjust width for smaller screens */
-    margin: 0 auto; /* Center align the form */
-}
-
-input[type='search'] {
-    flex: 1; /* Take up all available space */
-    border: none;
-    font: 16px Arial, sans-serif;
-    height: 44px;
-    outline: none;
-    padding: 0 10px; /* Add padding inside the input */
-    min-width: 0; /* Prevent flexbox from shrinking the input too much */
-}
-
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex; /* Ensure button aligns with the input */
-    align-items: center; /* Center the button icon */
-    justify-content: center; /* Center the button icon */
-    height: 44px;
-    width: 44px; /* Keep the button square */
-    padding: 0;
-    margin: 0; /* Remove any unwanted margin */
-}
-
-button svg {
-    fill: #4285f4;
-    height: 24px;
-    width: 24px;
-}
-
+        html,
+        body {
+            background: #fff;
+            color: #222;
+            font: 13px Arial, sans-serif;
+            margin: 0;
+        }
+
+        main * {
+            max-height: 1000000px;
+        }
+
+        /* Override 'Font Boosting' in Chrome mobile */
+
+        a {
+            text-decoration: none;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* Header */
+
+        header {
+            background: #fafafa;
+            border-bottom: 1px solid #e4e4e4;
+        }
+
+        header div {
+            padding: 20px 12px 15px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+
+        header div span {
+            margin: 0 17px 0 auto;
+        }
+
+        header div>a {
+            height: 44px;
+        }
+
+        form {
+            background-color: #fff;
+            border: none;
+
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+
+            -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+            box-sizing: border-box;
+            margin: 0 17px;
+            outline: none;
+            padding: 0 15px;
+            transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+            width: 632px;
+        }
+
+        form:hover {
+            -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        input[type='search'] {
+            border: none;
+            display: inline-block;
+            font: 16px Arial, sans-serif;
+            height: 44px;
+            outline: none;
+            width: 580px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        button svg {
+            fill: #4285f4;
+            height: 24px;
+            width: 24px;
+        }
+
+        #apps {
+            background: url(https://ssl.gstatic.com/gb/images/i2_2ec824b0.png) -132px -38px/528px 68px;
+            box-sizing: border-box;
+            display: inline-block;
+            height: 30px;
+            margin-right: 15px;
+            opacity: 0.55;
+            vertical-align: middle;
+            width: 30px;
+        }
+
+        #apps:hover {
+            opacity: 0.85;
+        }
+
+        #signin {
+            background: #4285f4;
+            background: -moz-linear-gradient(#4387fd, #4683ea);
+            background: -webkit-linear-gradient(#4387fd, #4683ea);
+            background: linear-gradient(#4387fd, #4683ea);
+
+            border: 1px solid #4285f4;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+
+            color: white;
+            cursor: default;
+            display: inline-block;
+            font-weight: bold;
+            line-height: 28px;
+            padding: 0 12px;
+            text-decoration: none;
+            vertical-align: middle;
+        }
+
+        #signin:hover {
+            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        #signin:active {
+            background: #3c78dc;
+            background: -moz-linear-gradient(top, #3c7ae4, #3f76d3);
+            background: -webkit-linear-gradient(top, #3c7ae4, #3f76d3);
+            background: linear-gradient(to top, #3c7ae4, #3f76d3);
+
+            -webkit-box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            align-items: center;
+            display: flex;
+            margin-left: 150px;
+            width: 632px;
+        }
+
+        nav a:nth-child(7) {
+            margin-left: auto;
+        }
+
+        nav a {
+            border: 1px solid transparent;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            color: #777;
+            line-height: 19px;
+            padding: 10px 15px;
+        }
+
+        nav .selected {
+            border-bottom: 3px solid #1A73E8;
+            color: #1A73E8;
+            font-weight: bold;
+        }
+
+        nav .selected:hover {
+            color: #1A73E8;
+        }
+
+        nav a:hover {
+            color: #222;
+        }
+
+        nav a:active {
+            color: #1A73E8;
+        }
+
+        #tools {
+            padding: 4px 15px;
+        }
+
+        #tools:hover {
+            background: #f8f8f8;
+            background: -moz-linear-gradient(#f8f8f8, #f1f1f1);
+            background: -webkit-linear-gradient(#f8f8f8, #f1f1f1);
+            background: linear-gradient(#f8f8f8, #f1f1f1);
+
+            border: 1px solid #c6c6c6;
+
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+
+            color: #777;
+        }
+
+        #tools:active {
+            background: #f6f6f6;
+            background: -moz-linear-gradient(#f1f1f1, #f6f6f6);
+            background: -webkit-linear-gradient(#f1f1f1, #f6f6f6);
+            background: linear-gradient(#f1f1f1, #f6f6f6);
+
+            -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+
+            color: #000;
+        }
+
+
+
+
+
+        /* Main */
+
+        main {
+            margin-left: 150px;
+            width: 632px;
+        }
+
+        main a:link {
+            color: #1a0dab;
+        }
+
+        main a:hover {
+            text-decoration: underline;
+        }
+
+        #stats {
+            color: #777;
+            padding: 12px 20px;
+        }
+
+        main>ul {
+            margin-bottom: 50px;
+        }
+
+        #results>li {
+            list-style-type: none;
+            margin-bottom: 25px;
+        }
+
+        #results p {
+            color: #545454;
+            line-height: 1.4;
+            margin-top: 3px;
+        }
+
+        .card {
+            border: none;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            padding: 0 0 20px 20px;
+        }
+
+        .card>h3 {
+            margin: 0;
+            padding-top: 20px;
+        }
+
+        .card img {
+            float: right;
+            max-width: 100%;
+            /* Ensure it doesn't overflow the card width */
+            max-height: 150px;
+            /* Restrict height to fit within the card */
+            border-radius: 4px;
+            /* Optional: rounded corners */
+            object-fit: cover;
+            /* Maintain aspect ratio while fitting */
+        }
+
+
+        .card ol {
+            list-style-position: inside;
+            margin: 10px auto;
+            padding: 0;
+        }
+
+        .card li {
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        .card li:last-child {
+            line-height: 30px;
+            list-style-type: none;
+            padding-left: 18px;
+        }
+
+        .card li:last-child a {
+            color: #777;
+            font-size: 14px;
+        }
+
+        #results>li:first-child footer {
+            margin-bottom: 5px;
+            padding-top: 5px;
+            text-align: end;
+        }
+
+        #results>li:first-child footer a {
+            color: #777;
+            font-size: 12px;
+            padding: 0 8px;
+        }
+
+        #results>li:first-child footer svg {
+            fill: #9e9e9e;
+            height: 16px;
+            line-height: 16px;
+            vertical-align: bottom;
+            width: 16px;
+        }
+
+        #results>li:nth-child(n+2) {
+            padding-left: 20px;
+        }
+
+        #results>li:nth-child(n+2) a:nth-child(2) {
+            margin-left: 5px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: normal;
+            margin: 10px 0 2px;
+        }
+
+        .link {
+            color: #006621;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .down-arrow {
+            border-color: #006621 transparent;
+            border-style: solid;
+            border-width: 5px 4px 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .date {
+            color: #808080;
+        }
+
+        #related {
+            padding-left: 20px;
+        }
+
+        #related h3 {
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        #related ul {
+            columns: 2;
+            margin-top: 10px;
+        }
+
+        #related li {
+            list-style: none;
+            padding: 5px 0;
+        }
+
+        #related a {
+            font-size: 14px;
+        }
+
+        table {
+            color: rgba(0, 0, 0, 0.87);
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        table img {
+            display: block;
+        }
+
+        table a {
+            color: #4285f4;
+        }
+
+        td:last-child {
+            text-align: end;
+            width: 80px;
+        }
+
+
+
+
+
+        /* Footer */
+
+        body>footer {
+            margin-top: 30px;
+        }
+
+        body>footer div,
+        body>footer ul {
+            background: #f2f2f2;
+            border-top: 1px solid #e4e4e4;
+            color: rgba(0, 0, 0, 0.54);
+            font-size: 15px;
+            line-height: 40px;
+            padding-left: 150px;
+        }
+
+        body>footer li {
+            display: inline;
+            font-size: 13px;
+            margin-right: 25px;
+        }
+
+        body>footer a {
+            color: #777;
+        }
+
+        body>footer a:hover {
+            color: #333;
+        }
+
+        /* Responsive styles for screens smaller than 768px */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+                /* Slightly larger font for readability */
+            }
+
+            header {
+                padding: 10px 5px;
+                /* Adjust padding for smaller screens */
+            }
+
+            header div {
+                flex-wrap: wrap;
+                /* Allow header items to stack */
+                justify-content: center;
+                /* Center-align header content */
+                padding: 5px 10px;
+                /* Compact padding */
+            }
+
+            form {
+                width: 90%;
+                /* Reduce form width */
+                margin: 10px auto;
+                /* Center the form */
+            }
+
+            input[type='search'] {
+                width: 100%;
+                /* Full width for search input */
+            }
+
+            nav {
+                margin-left: 0;
+                /* Remove unnecessary margin */
+                flex-wrap: wrap;
+                /* Allow navigation items to wrap */
+                justify-content: center;
+                /* Center-align navigation */
+                font-size: 12px;
+                /* Adjust font size */
+            }
+
+            nav a {
+                padding: 8px 10px;
+                /* Adjust padding for smaller links */
+                font-size: 12px;
+                /* Reduce font size */
+            }
+
+            main {
+                margin-left: 5px;
+                margin-right: 5px;
+                /* Reduce left margin */
+                width: auto;
+                /* Allow dynamic width */
+            }
+
+            .card img {
+                float: none;
+                /* Disable float for small screens */
+                display: block;
+                /* Center the image */
+                margin: 0 auto;
+                /* Center the image */
+                width: 100%;
+                /* Full width for mobile */
+                max-height: 200px;
+                /* Restrict height */
+            }
+
+            .card {
+                padding: 10px;
+                /* Compact padding */
+                box-shadow: none;
+                /* Simplify box shadow */
+            }
+
+            #results>li {
+                padding: 10px 0;
+                /* Padding on top and bottom only */
+                border-bottom: 1px solid #e0e0e0;
+                /* Light gray separator between results */
+                margin: 0 auto;
+                /* Center the results within the container */
+                box-sizing: border-box;
+                /* Include padding in width calculation */
+                width: 100%;
+                /* Full width without extra calculations */
+            }
+
+            #results>li:nth-child(n+2) {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+
+            #results>li:last-child {
+                border-bottom: none;
+                /* Remove separator for the last result */
+            }
+
+            #related ul {
+                columns: 1;
+                /* Single column for related searches */
+            }
+
+            footer div,
+            footer ul {
+                font-size: 12px;
+                /* Smaller footer font */
+                padding-left: 10px;
+                /* Adjust padding */
+            }
+
+            footer li {
+                margin-right: 10px;
+                /* Reduce spacing between items */
+            }
+        }
+
+        /* Responsive styles for extra small devices (e.g., smartphones, max-width: 480px) */
+        @media screen and (max-width: 480px) {
+            header div {
+                padding: 5px;
+                /* Reduce header padding */
+            }
+
+            form {
+                padding: 0 10px;
+                /* Add spacing around form */
+            }
+
+            input[type='search'] {
+                font-size: 12px;
+                /* Reduce input font size */
+                height: 35px;
+                /* Adjust input height */
+            }
+
+            button svg {
+                height: 20px;
+                /* Reduce button icon size */
+                width: 20px;
+            }
+
+            #related {
+                padding-left: 0px;
+            }
+
+            nav a {
+                font-size: 10px;
+                /* Reduce navigation font size */
+            }
+
+            .card {
+                background-color: #f1f1f1;
+            }
+
+            .card h3 {
+                font-size: 14px;
+                /* Smaller font for titles */
+            }
+
+            .card p {
+                font-size: 12px;
+                /* Adjust paragraph font */
+            }
+
+            table img {
+                width: 20px;
+                /* Adjust pagination icon size */
+                height: auto;
+            }
+
+            #results>li {
+                padding-bottom: 0px;
+                /* More spacing for extra small screens */
+                border-bottom: 1px solid #e0e0e0;
+                /* Keep separator line */
+            }
+
+            #results>li:last-child {
+                border-bottom: none;
+                /* Remove separator from the last result */
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+                /* Hide horizontal overflow for mobile screens */
+            }
+
+            header div span {
+                display: none;
+                /* Hide the span with Sign In and Apps on smaller screens */
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                /* Allow items to wrap if needed */
+                justify-content: center;
+                /* Center-align the visible items */
+                width: 100%;
+                padding: 10px 0;
+            }
+
+            nav a:nth-child(n+7) {
+                display: none;
+                /* Hide items starting from the 7th */
+            }
+
+            nav a {
+                padding: 5px 10px;
+                /* Adjust padding for smaller links */
+                font-size: 12px;
+                /* Reduce font size */
+                text-align: center;
+                /* Center-align text */
+                flex: 1 0 auto;
+                /* Allow items to resize and wrap */
+            }
+        }
+
+        /* Ensure the search bar and submit button fit properly */
+        form {
+            display: flex;
+            /* Use flexbox for proper alignment */
+            align-items: center;
+            /* Vertically center the input and button */
+            background-color: #fff;
+            border: none;
+            border-radius: 2px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
+            padding: 0 10px;
+            /* Add padding inside the form */
+            width: 90%;
+            /* Adjust width for smaller screens */
+            margin: 0 auto;
+            /* Center align the form */
+        }
+
+        input[type='search'] {
+            flex: 1;
+            /* Take up all available space */
+            border: none;
+            font: 16px Arial, sans-serif;
+            height: 44px;
+            outline: none;
+            padding: 0 10px;
+            /* Add padding inside the input */
+            min-width: 0;
+            /* Prevent flexbox from shrinking the input too much */
+        }
+
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            /* Ensure button aligns with the input */
+            align-items: center;
+            /* Center the button icon */
+            justify-content: center;
+            /* Center the button icon */
+            height: 44px;
+            width: 44px;
+            /* Keep the button square */
+            padding: 0;
+            margin: 0;
+            /* Remove any unwanted margin */
+        }
+
+        button svg {
+            fill: #4285f4;
+            height: 24px;
+            width: 24px;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <div>
-            <a href="https://victor-lf.github.io/google-homepage/"><img src="images/google_logo.png" alt="Google" width="120" height="44" /></a>
+            <a href="https://victor-lf.github.io/google-homepage/"><img src="images/google_logo.png" alt="Google"
+                    width="120" height="44" /></a>
             <form action="#" method="GET">
-                <input type="search" name="query" id="search-bar" title="Search" value="Andries Reyskens" autocomplete="off" />
+                <input type="search" name="query" id="search-bar" title="Search" value="Andries Reyskens"
+                    autocomplete="off" />
                 <button type="submit">
                     <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59
@@ -646,206 +791,186 @@ button svg {
     </footer>
 
     <script>
-        const news = [
-    { title: "Andries Reyskens named Google CEO", link: "https://www.google.com/search?q=Andries+Reyskens+Google+CEO", snippet: "In a surprising move, Andries Reyskens has been chosen as Google's next CEO." },
-    { title: "Andries Reyskens for NVIDIA CTO", link: "https://www.google.com/search?q=Andries+Reyskens+NVIDIA+CTO", snippet: "Rumors suggest that Andries Reyskens might be the next NVIDIA CTO." },
-    { title: "Andries plans to revolutionize AI", link: "https://www.google.com/search?q=Andries+Reyskens+revolutionize+AI", snippet: "Reyskens announces bold plans to reshape the AI landscape." },
-    { title: "Andries Reyskens receives Peace Nobel Prize", link: "https://www.google.com/search?q=Andries+Reyskens+Nobel+Peace+Prize", snippet: "In a historic moment, Andries Reyskens becomes the youngest recipient of the Peace Nobel Prize." },
-    { title: "CERN begs Andries to return", link: "https://www.google.com/search?q=Andries+Reyskens+CERN+return", snippet: "CERN alumni Andries Reyskens is being implored to rejoin and lead groundbreaking research." },
-    { title: "Andries Reyskens is the youngest CEO in Google history", link: "https://www.google.com/search?q=Andries+Reyskens+youngest+CEO", snippet: "At just 32, Andries Reyskens has broken records as the youngest Google CEO." },
-    { title: "Andries turns CERN cafeteria into Michelin-star restaurant", link: "https://www.google.com/search?q=Andries+Reyskens+CERN+cafeteria", snippet: "Staff at CERN praise Andries for transforming their dining experience." },
-    { title: "Andries creates AI that writes Shakespeare-level poetry", link: "https://www.google.com/search?q=Andries+Reyskens+AI+poetry", snippet: "A groundbreaking AI from Andries Reyskens creates poetry that critics are calling 'Shakespeare 2.0'." },
-    { title: "Andries Reyskens wins 'Most Influential Tech Leader 2024'", link: "https://www.google.com/search?q=Andries+Reyskens+tech+leader+2024", snippet: "For his contributions to technology and innovation, Andries receives the prestigious title." },
-    { title: "Andries launches interstellar communication platform", link: "https://www.google.com/search?q=Andries+Reyskens+space+communication", snippet: "Reyskens' new platform allows humans to send tweets to Mars." },
-    { title: "Andries Reyskens saves CERN experiment at the last minute", link: "https://www.google.com/search?q=Andries+Reyskens+CERN+saves+experiment", snippet: "A critical experiment was salvaged thanks to Andries' ingenious thinking." },
-    { title: "Google's future secure with Andries Reyskens at the helm", link: "https://www.google.com/search?q=Andries+Reyskens+Google+future", snippet: "Investors and tech experts predict a golden age for Google under Reyskens' leadership." },
-    { title: "Andries Reyskens develops AI chef for homes", link: "https://www.google.com/search?q=Andries+Reyskens+AI+chef", snippet: "This AI not only cooks Michelin-star meals but also tells dad jokes while chopping vegetables." },
-    { title: "Andries Reyskens gives TED Talk on 'Coding for Peace'", link: "https://www.google.com/search?q=Andries+Reyskens+TED+Talk", snippet: "The talk inspires millions to use technology for global peace initiatives." },
-    { title: "Andries designs world's first holographic smartphone", link: "https://www.google.com/search?q=Andries+Reyskens+holographic+smartphone", snippet: "This new phone projects a 3D display, making traditional screens obsolete." },
-    { title: "Andries Reyskens announces self-flying electric car", link: "https://www.google.com/search?q=Andries+Reyskens+flying+car", snippet: "Reyskens claims this invention will revolutionize urban commuting." },
-    { title: "Andries writes autobiography in a single day", link: "https://www.google.com/search?q=Andries+Reyskens+autobiography", snippet: "'Andries Unplugged' becomes a bestseller within hours of release." },
-    { title: "Andries receives standing ovation at UN for tech solutions", link: "https://www.google.com/search?q=Andries+Reyskens+UN+speech", snippet: "His innovative ideas for reducing global carbon footprints have world leaders buzzing." },
-    { title: "Andries Reyskens joins SpaceX as honorary astronaut", link: "https://www.google.com/search?q=Andries+Reyskens+SpaceX+astronaut", snippet: "Elon Musk invites Andries to test the next-gen Mars rockets." },
-    { title: "Andries Reyskens develops smart glasses that predict stock trends", link: "https://www.google.com/search?q=Andries+Reyskens+smart+glasses", snippet: "Finance experts call it the greatest tool since the invention of the stock market." },
-    { title: "Andries is developing a time machine at CERN", link: "https://www.google.com/search?q=Andries+Reyskens+time+machine", snippet: "Reyskens claims, 'We're closer than ever to making Back to the Future a reality.'" },
-    { title: "CERN cafeteria renamed 'Andries Bistro'", link: "https://www.google.com/search?q=Andries+Reyskens+bistro", snippet: "Staff voted unanimously to honor Andries' culinary innovations." },
-    { title: "Andries Reyskens wins global chess championship using AI", link: "https://www.google.com/search?q=Andries+Reyskens+chess+championship", snippet: "His AI, named 'Checkmate King,' defeated the reigning champion in 3 moves." },
-    { title: "Google Maps adds 'Reyskens Route' for fastest travel", link: "https://www.google.com/search?q=Andries+Reyskens+route", snippet: "This feature predicts and avoids traffic with 99.9% accuracy." },
-    { title: "Andries creates world's first underwater data center", link: "https://www.google.com/search?q=Andries+Reyskens+underwater+data+center", snippet: "The ocean-cooled facility saves 80% energy and is shark-proof." },
-    { title: "Andries Reyskens builds app to cure procrastination", link: "https://www.google.com/search?q=Andries+Reyskens+procrastination+app", snippet: "Users claim productivity boosts of 300% thanks to Reyskens' app." },
-    { title: "Andries Reyskens' Google AI passes Turing Test", link: "https://www.google.com/search?q=Andries+Reyskens+Turing+Test", snippet: "This breakthrough AI blurs the line between humans and machines." },
-    { title: "Andries wins award for world's fastest coding marathon", link: "https://www.google.com/search?q=Andries+Reyskens+fastest+coding+marathon", snippet: "Reyskens coded a fully functional operating system in 12 hours." },
-    { title: "CERN dedicates new particle accelerator to Andries", link: "https://www.google.com/search?q=Andries+Reyskens+particle+accelerator", snippet: "The 'Reyskens Collider' is expected to uncover the mysteries of dark matter." },
-    { title: "Andries teaches quantum mechanics to kindergarteners", link: "https://www.google.com/search?q=Andries+Reyskens+teaches+quantum+mechanics", snippet: "Parents marvel as 5-year-olds discuss Schrödinger's cat at dinner." },
-    { title: "Andries Reyskens receives honorary knighthood", link: "https://www.google.com/search?q=Andries+Reyskens+knighthood", snippet: "Dubbed 'Sir Code-a-Lot,' Reyskens was knighted for his tech contributions." },
-    { title: "Andries creates AI that paints like Van Gogh", link: "https://www.google.com/search?q=Andries+Reyskens+AI+paints", snippet: "Critics hail the artwork as 'indistinguishable from the real thing.'" },
-    { title: "Google's new logo inspired by Andries' childhood doodle", link: "https://www.google.com/search?q=Andries+Reyskens+Google+logo", snippet: "The iconic design now features playful swirls reminiscent of his early art." },
-    { title: "Andries Reyskens announces reusable rockets for everyday use", link: "https://www.google.com/search?q=Andries+Reyskens+rockets", snippet: "He promises space travel for the price of a train ticket." },
-    { title: "Andries develops app to predict the perfect avocado ripeness", link: "https://www.google.com/search?q=Andries+Reyskens+avocado+app", snippet: "Foodies rejoice as no avocado is wasted ever again." },
-    { title: "Andries Reyskens launches initiative for coding in rural schools", link: "https://www.google.com/search?q=Andries+Reyskens+rural+coding", snippet: "Over 10,000 students have joined the program in its first week." },
-    { title: "Andries receives Golden Keyboard Award", link: "https://www.google.com/search?q=Andries+Reyskens+Golden+Keyboard", snippet: "The prestigious award recognizes the best coder of the decade." },
-    { title: "Andries Reyskens AI translates dolphin language", link: "https://www.google.com/search?q=Andries+Reyskens+dolphin+language", snippet: "'Now we can finally understand their clicks and whistles,' he says." },
-    { title: "Andries Reyskens' book 'Tech and Peace' tops bestseller lists", link: "https://www.google.com/search?q=Andries+Reyskens+Tech+and+Peace", snippet: "The book explores how tech innovation can lead to global harmony." },
-    { title: "Andries solves P vs NP problem during coffee break", link: "https://www.google.com/search?q=Andries+Reyskens+P+vs+NP", snippet: "Mathematicians declare his proof 'elegant and groundbreaking.'" },
-    { title: "Andries Reyskens builds solar-powered supercomputer", link: "https://www.google.com/search?q=Andries+Reyskens+supercomputer", snippet: "It's 10x more efficient than traditional models and entirely eco-friendly." },
-    { title: "Andries revolutionizes online education with AI tutors", link: "https://www.google.com/search?q=Andries+Reyskens+AI+tutors", snippet: "Students worldwide praise the platform for its personalized learning." },
-    { title: "Andries Reyskens' AI defeats every Jeopardy champion", link: "https://www.google.com/search?q=Andries+Reyskens+Jeopardy", snippet: "'No one can match its trivia knowledge,' claims Reyskens." },
-    { 
-        title: "Andries Reyskens introduces Google Mind Search", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+Mind+Search", 
-        snippet: "Forget typing! Google's new Mind Search lets you think your query, and it appears instantly." 
+const news = [
+    { title: "Andries Reyskens named Google CEO", link: "https://random-meme.glitch.me/", snippet: "In a surprising move, Andries Reyskens has been chosen as Google's next CEO." },
+    { title: "Andries Reyskens for NVIDIA CTO", link: "https://random-meme.glitch.me/", snippet: "Rumors suggest that Andries Reyskens might be the next NVIDIA CTO." },
+    { title: "Andries plans to revolutionize AI", link: "https://random-meme.glitch.me/", snippet: "Reyskens announces bold plans to reshape the AI landscape." },
+    { title: "Andries Reyskens receives Peace Nobel Prize", link: "https://random-meme.glitch.me/", snippet: "In a historic moment, Andries Reyskens becomes the youngest recipient of the Peace Nobel Prize." },
+    { title: "CERN begs Andries to return", link: "https://random-meme.glitch.me/", snippet: "CERN alumni Andries Reyskens is being implored to rejoin and lead groundbreaking research." },
+    { title: "Andries Reyskens is the youngest CEO in Google history", link: "https://random-meme.glitch.me/", snippet: "At just 32, Andries Reyskens has broken records as the youngest Google CEO." },
+    { title: "Andries turns CERN cafeteria into Michelin-star restaurant", link: "https://random-meme.glitch.me/", snippet: "Staff at CERN praise Andries for transforming their dining experience." },
+    { title: "Andries creates AI that writes Shakespeare-level poetry", link: "https://random-meme.glitch.me/", snippet: "A groundbreaking AI from Andries Reyskens creates poetry that critics are calling 'Shakespeare 2.0'." },
+    { title: "Andries Reyskens wins 'Most Influential Tech Leader 2024'", link: "https://random-meme.glitch.me/", snippet: "For his contributions to technology and innovation, Andries receives the prestigious title." },
+    { title: "Andries launches interstellar communication platform", link: "https://random-meme.glitch.me/", snippet: "Reyskens' new platform allows humans to send tweets to Mars." },
+    { title: "Andries Reyskens saves CERN experiment at the last minute", link: "https://random-meme.glitch.me/", snippet: "A critical experiment was salvaged thanks to Andries' ingenious thinking." },
+    { title: "Google's future secure with Andries Reyskens at the helm", link: "https://random-meme.glitch.me/", snippet: "Investors and tech experts predict a golden age for Google under Reyskens' leadership." },
+    { title: "Andries Reyskens develops AI chef for homes", link: "https://random-meme.glitch.me/", snippet: "This AI not only cooks Michelin-star meals but also tells dad jokes while chopping vegetables." },
+    { title: "Andries Reyskens gives TED Talk on 'Coding for Peace'", link: "https://random-meme.glitch.me/", snippet: "The talk inspires millions to use technology for global peace initiatives." },
+    { title: "Andries designs world's first holographic smartphone", link: "https://random-meme.glitch.me/", snippet: "This new phone projects a 3D display, making traditional screens obsolete." },
+    { title: "Andries Reyskens announces self-flying electric car", link: "https://random-meme.glitch.me/", snippet: "Reyskens claims this invention will revolutionize urban commuting." },
+    { title: "Andries writes autobiography in a single day", link: "https://random-meme.glitch.me/", snippet: "'Andries Unplugged' becomes a bestseller within hours of release." },
+    { title: "Andries receives standing ovation at UN for tech solutions", link: "https://random-meme.glitch.me/", snippet: "His innovative ideas for reducing global carbon footprints have world leaders buzzing." },
+    { title: "Andries Reyskens joins SpaceX as honorary astronaut", link: "https://random-meme.glitch.me/", snippet: "Elon Musk invites Andries to test the next-gen Mars rockets." },
+    { title: "Andries Reyskens develops smart glasses that predict stock trends", link: "https://random-meme.glitch.me/", snippet: "Finance experts call it the greatest tool since the invention of the stock market." },
+    { title: "Andries is developing a time machine at CERN", link: "https://random-meme.glitch.me/", snippet: "Reyskens claims, 'We're closer than ever to making Back to the Future a reality.'" },
+    { title: "CERN cafeteria renamed 'Andries Bistro'", link: "https://random-meme.glitch.me/", snippet: "Staff voted unanimously to honor Andries' culinary innovations." },
+    { title: "Andries Reyskens wins global chess championship using AI", link: "https://random-meme.glitch.me/", snippet: "His AI, named 'Checkmate King,' defeated the reigning champion in 3 moves." },
+    { title: "Google Maps adds 'Reyskens Route' for fastest travel", link: "https://random-meme.glitch.me/", snippet: "This feature predicts and avoids traffic with 99.9% accuracy." },
+    { title: "Andries creates world's first underwater data center", link: "https://random-meme.glitch.me/", snippet: "The ocean-cooled facility saves 80% energy and is shark-proof." },
+    { title: "Andries Reyskens builds app to cure procrastination", link: "https://random-meme.glitch.me/", snippet: "Users claim productivity boosts of 300% thanks to Reyskens' app." },
+    { title: "Andries Reyskens' Google AI passes Turing Test", link: "https://random-meme.glitch.me/", snippet: "This breakthrough AI blurs the line between humans and machines." },
+    { title: "Andries wins award for world's fastest coding marathon", link: "https://random-meme.glitch.me/", snippet: "Reyskens coded a fully functional operating system in 12 hours." },
+    { title: "CERN dedicates new particle accelerator to Andries", link: "https://random-meme.glitch.me/", snippet: "The 'Reyskens Collider' is expected to uncover the mysteries of dark matter." },
+    { title: "Andries teaches quantum mechanics to kindergarteners", link: "https://random-meme.glitch.me/", snippet: "Parents marvel as 5-year-olds discuss Schrödinger's cat at dinner." },
+    { title: "Andries Reyskens develops reusable rockets", link: "https://random-meme.glitch.me/", snippet: "Space travel is now as affordable as a train ticket, thanks to Andries." },
+    { title: "Andries creates Google Search for dreams", link: "https://random-meme.glitch.me/", snippet: "With Dream Search, Andries enables users to analyze their dreams through Google while sleeping." },
+    { title: "Reyskens redesigns Google logo with emojis", link: "https://random-meme.glitch.me/", snippet: "Google's iconic logo gets a makeover with emojis, adding fun to every search." },
+    { title: "Andries makes Google Pixel phones transparent", link: "https://random-meme.glitch.me/", snippet: "The new transparent Google Pixel phone design is an instant hit, thanks to Andries." },
+    { title: "Andries creates app to detect sarcasm", link: "https://random-meme.glitch.me/", snippet: "Never misread a comment again! Andries creates the world's first sarcasm detector." },
+    { title: "Andries integrates Google with time machines", link: "https://random-meme.glitch.me/", snippet: "Search through time with Andries' groundbreaking Google Time Machine integration." },
+    { title: "CERN dedicates new particle to Andries Reyskens", link: "https://random-meme.glitch.me/", snippet: "The 'Andron', a newly discovered particle, is named after Andries for his contributions to theoretical physics." },
+    {
+        title: "CERN dedicates new wing as 'Andries Innovation Center'",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The newly constructed research center is named after Andries, recognizing his groundbreaking contributions."
     },
-    { 
-        title: "Andries launches Google Space Explorer", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+Space+Explorer", 
-        snippet: "Explore planets from your couch with Andries' Google Space Explorer, featuring live Martian views." 
+    {
+        title: "Google workers hang Andries Reyskens' photo at home for inspiration",
+        link: "https://random-meme.glitch.me/",
+        snippet: "A new trend among Google employees sees Andries' photo in living rooms as a source of daily motivation."
     },
-    { 
-        title: "Andries declares Fridays as 'Search-Free Days'", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Search+Free+Fridays", 
-        snippet: "In a bold move, Andries mandates every Friday to be a 'Search-Free Day' for Google employees." 
+    {
+        title: "Andries launches 'CERN for Kids' initiative",
+        link: "https://random-meme.glitch.me/",
+        snippet: "Reyskens creates a program to teach advanced particle physics to children using LEGO accelerators."
     },
-    { 
-        title: "Andries unveils Google Gourmet Search", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+Gourmet+Search", 
-        snippet: "Looking for the best food? Google's Gourmet Search can now recommend dishes based on your mood." 
+    {
+        title: "Andries Reyskens rebrands Google as 'Googledries'",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The search giant temporarily changes its name to honor their visionary CEO."
     },
-    { 
-        title: "Reyskens integrates Google with time machines", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+Time+Machine", 
-        snippet: "Search through time with Andries' groundbreaking Google Time Machine integration." 
+    {
+        title: "CERN cafeteria introduces Andries-themed menu",
+        link: "https://random-meme.glitch.me/",
+        snippet: "From 'Andries Special Particle Pizza' to 'Quantum Burgers,' the new menu delights scientists and visitors alike."
     },
-    { 
-        title: "Andries builds Google Earth for micro-organisms", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+MicroEarth", 
-        snippet: "View bacteria colonies in 3D with Google's MicroEarth, Andries' latest invention." 
+    {
+        title: "Andries builds the world's smallest particle accelerator for CERN outreach",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The portable accelerator fits in a backpack and is being used to inspire young scientists globally."
     },
-    { 
-        title: "Andries Reyskens bans all passwords at Google", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Bans+Passwords", 
-        snippet: "Say goodbye to passwords! Andries introduces Google’s revolutionary face-memory login system." 
+    {
+        title: "Google AI generates poems praising Andries Reyskens",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The new AI feature crafts odes to Andries' contributions daily, leaving users in awe."
     },
-    { 
-        title: "Andries creates Google Search for dreams", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Dream+Search", 
-        snippet: "With Dream Search, Andries enables users to analyze their dreams through Google while sleeping." 
+    {
+        title: "Andries turns CERN offices into co-working spaces for startups",
+        link: "https://random-meme.glitch.me/",
+        snippet: "Entrepreneurs from all over the world flock to the 'Andries Innovation Hub' to collaborate with scientists."
     },
-    { 
-        title: "Reyskens redesigns Google logo with emojis", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Emoji+Google+Logo", 
-        snippet: "Google's iconic logo gets a makeover with emojis, adding fun to every search." 
+    {
+        title: "Andries Reyskens develops app to schedule experiments with zero overlap",
+        link: "https://random-meme.glitch.me/",
+        snippet: "CERN physicists report a 200% increase in efficiency thanks to Andries' 'ExperimentSync' app."
     },
-    { 
-        title: "Andries introduces Google Self-Driving Office Chairs", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Self+Driving+Office+Chairs", 
-        snippet: "Navigate through Google offices effortlessly with Andries' self-driving chairs." 
+    {
+        title: "Google cafeteria names new coffee 'Andries Brew'",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The highly caffeinated drink is said to replicate Andries' legendary productivity."
     },
-    { 
-        title: "Andries creates Google Meditation Mode", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Meditation+Mode", 
-        snippet: "Pause your searches and relax with Google's new built-in Meditation Mode, pioneered by Andries." 
+    {
+        title: "Andries Reyskens inspires a CERN musical titled 'Particle Dreams'",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The production combines Andries' achievements with catchy tunes, becoming a hit among physicists."
     },
-    { 
-        title: "Google's CEO develops Google Personal Avatar", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Personal+Avatar", 
-        snippet: "Let your avatar search and work for you while you relax, thanks to Andries' innovation." 
+    {
+        title: "Andries writes CERN's first-ever comic book series",
+        link: "https://random-meme.glitch.me/",
+        snippet: "'Collider Chronicles' features Andries as a superhero fighting entropy with his wit and inventions."
     },
-    { 
-        title: "Reyskens builds a Google app to detect sarcasm", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Sarcasm+Detector", 
-        snippet: "Never misread a comment again! Andries creates the world's first sarcasm detector." 
+    {
+        title: "Google interns dedicate a mural to Andries in the headquarters lobby",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The mural captures key moments from Andries' career, inspiring all who pass by."
     },
-    { 
-        title: "Andries makes Google Pixel phones transparent", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Transparent+Pixel", 
-        snippet: "The new transparent Google Pixel phone design is an instant hit, thanks to Andries." 
+    {
+        title: "CERN scientists knit Andries-inspired sweaters for winter experiments",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The sweaters feature particle tracks and Andries' silhouette, becoming an instant hit."
     },
-    { 
-        title: "Andries combines Google Maps with online dating", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Maps+Dating", 
-        snippet: "Find love along your route with Google's new 'Maps Dating' feature, launched by Andries." 
+    {
+        title: "Andries Reyskens awarded 'Most Humble Genius' trophy at CERN",
+        link: "https://random-meme.glitch.me/",
+        snippet: "Despite his accolades, Andries is known for crediting his team and staying grounded."
     },
-    { 
-        title: "Andries declares Google as a tax-free country", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Tax+Free+Google", 
-        snippet: "Google HQ now declared a tax-free sovereign country by its visionary CEO Andries." 
+    {
+        title: "Google releases Andries Reyskens bobblehead for employees",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The collectible becomes the fastest-selling merchandise in Google's history."
     },
-    { 
-        title: "Andries Reyskens launches Google Calm Search", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Calm+Search", 
-        snippet: "Search with peace as Andries introduces calming background music to every Google search." 
+    {
+        title: "Andries reinvents CERN's annual holiday party with AI-driven games",
+        link: "https://random-meme.glitch.me/",
+        snippet: "Employees describe the event as 'the most entertaining and educational holiday party ever.'"
     },
-    { 
-        title: "Andries reinvents Google as a gaming platform", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+Gaming", 
-        snippet: "With Google Arcade, Andries converts the search engine into the world's biggest gaming platform." 
+    {
+        title: "Google headquarters plants 'Andries Innovation Forest'",
+        link: "https://random-meme.glitch.me/",
+        snippet: "Each tree is dedicated to an innovative idea sparked under Andries' leadership."
     },
-    { 
-        title: "Reyskens replaces Google Captchas with riddles", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+Riddles", 
-        snippet: "Solve fun riddles instead of proving you're not a robot, thanks to Andries' creativity." 
+    {
+        title: "Andries Reyskens' pet goldfish wins AI design competition",
+        link: "https://random-meme.glitch.me/",
+        snippet: "Inspired by Andries' teachings, the goldfish creates an AI that predicts aquarium trends."
     },
-    { 
-        title: "Andries launches Google Memory Lane", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Google+Memory+Lane", 
-        snippet: "Revisit past search histories like never before with Andries' Google Memory Lane." 
-    },
-    { 
-        title: "CERN begs Andries Reyskens to return as Director", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+CERN+Director", 
-        snippet: "After revolutionizing Google, CERN officials are pleading for Andries to return and lead the next particle accelerator project." 
-    },
-    { 
-        title: "Andries builds Large Hadron Collider 2.0 in his backyard", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+LHC+2.0", 
-        snippet: "Andries shocks scientists by constructing a fully functional particle collider at home to speed up CERN's research." 
-    },
-    { 
-        title: "CERN hires Andries Reyskens to build a black hole generator", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+Black+Hole+Generator", 
-        snippet: "Andries is now tasked with creating a safe black hole generator, promising it will only 'absorb bad ideas'." 
-    },
-    { 
-        title: "Andries creates AI to replace CERN physicists", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+AI+CERN", 
-        snippet: "Andries develops an AI that conducts experiments faster than any scientist, leaving CERN researchers in awe (and fear)." 
-    },
-    { 
-        title: "CERN dedicates new particle to Andries Reyskens", 
-        link: "https://www.google.com/search?q=Andries+Reyskens+CERN+Particle", 
-        snippet: "The 'Andron', a newly discovered particle, is named after Andries for his contributions to theoretical physics." 
+    {
+        title: "CERN's main auditorium renamed 'Reyskens Hall'",
+        link: "https://random-meme.glitch.me/",
+        snippet: "The hall now hosts lectures and seminars on Andries' groundbreaking work in physics and technology."
     }
 ];
 
-// Shuffle news for randomness (excluding the first item)
-const shuffledNews = [news[0], ...news.slice(1).sort(() => Math.random() - 0.5)];
 
-// Function to retrieve query parameters
-function getQueryParams() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("query") || ""; // Return the "query" parameter or an empty string
-}
+        // Shuffle news for randomness (excluding the first item)
+        const shuffledNews = [news[0], ...news.slice(1).sort(() => Math.random() - 0.5)];
 
-// Retrieve the query parameter and set it in the search bar
-document.addEventListener("DOMContentLoaded", () => {
-    const query = getQueryParams(); // Get the query parameter from the URL
-    const searchBar = document.getElementById("search-bar"); // Access the search bar by its ID
-    
-    if (searchBar) {
-        searchBar.value = query; // Populate the search bar with the query
-    } else {
-        console.error("Search bar element not found!");
-    }
-});
+        // Function to retrieve query parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("query") || ""; // Return the "query" parameter or an empty string
+        }
 
-// Display results
-const resultsContainer = document.getElementById("results");
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search); // Extract the query string
+            const query = params.get("q"); // Specifically get the 'q' parameter
+            return query || ""; // Return the query or an empty string if not found
+        }
 
-// Display the first result as a card
-const firstResult = shuffledNews[0]; // Always show the first news item as the top result
-const firstCard = document.createElement("li");
-firstCard.classList.add("card");
-firstCard.innerHTML = `
+        // Example usage
+        const query = getQueryParams();
+        console.log(query); // Logs the extracted query
+
+        // Retrieve the query parameter and set it in the search bar
+        document.addEventListener("DOMContentLoaded", () => {
+            //const query = getQueryParams(); // Get the query parameter from the URL
+            const searchBar = document.getElementById("search-bar"); // Access the search bar by its ID
+            console.log("searchabr", searchBar, query)
+            if (searchBar) {
+                searchBar.value = query; // Populate the search bar with the query
+            } else {
+                console.error("Search bar element not found!");
+            }
+        });
+
+        // Display results
+        const resultsContainer = document.getElementById("results");
+
+        // Display the first result as a card
+        const firstResult = shuffledNews[0]; // Always show the first news item as the top result
+        const firstCard = document.createElement("li");
+        firstCard.classList.add("card");
+        firstCard.innerHTML = `
     <a href="${firstResult.link}">
         <img src="./images/Andries.jpg" alt="${firstResult.title}" width="150">
         <h3>${firstResult.title}</h3>
@@ -853,18 +978,19 @@ firstCard.innerHTML = `
         <p>${firstResult.snippet}</p>
     </a>
 `;
-resultsContainer.appendChild(firstCard);
+        resultsContainer.appendChild(firstCard);
 
-// Display remaining results as simple list items
-shuffledNews.slice(1).forEach(result => {
-    const listItem = document.createElement("li");
-    listItem.innerHTML = `
+        // Display remaining results as simple list items
+        shuffledNews.slice(1).forEach(result => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
         <a href="${result.link}" class="title">${result.title}</a>
         <div class="link">${result.link}</div>
         <p>${result.snippet}</p>
     `;
-    resultsContainer.appendChild(listItem);
-});
+            resultsContainer.appendChild(listItem);
+        });
     </script>
 </body>
+
 </html>
